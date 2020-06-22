@@ -1,4 +1,6 @@
-export default {
+import { Configuration } from '@nuxt/types';
+
+const config: Configuration = {
   mode: 'universal',
   /*
    ** Headers of the page
@@ -41,7 +43,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios'
   ],
-  serverMiddleware: ['~/api/index.js'],
+  serverMiddleware: ['~/api/index.ts'],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -57,3 +59,5 @@ export default {
     extend(_config, _ctx) {}
   }
 };
+
+export default config;

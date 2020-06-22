@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const artistSchema = new mongoose.Schema({
+const artistSchema: mongoose.Schema = new mongoose.Schema({
   name: {
     type: String,
     required: true
@@ -19,4 +19,4 @@ const artistSchema = new mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('Artist', artistSchema);
+export default mongoose.model('Artist', artistSchema);

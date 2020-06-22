@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h1>Hi {{ name }}</h1>
-    <b-link href="spotify:album:4gvQO5mEuhbMSrLIuwXkmz">google</b-link>
   </div>
 </template>
 

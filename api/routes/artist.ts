@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+
+import Artist from './artistModel';
 const router = express.Router();
-const Artist = require('./artistModel');
 
 router.get('/random', async (_req, res) => {
   try {
@@ -26,4 +27,4 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
