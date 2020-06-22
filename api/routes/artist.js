@@ -15,7 +15,11 @@ router.get('/random', async (_req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const artist = await Artist.findById(req.params.id);
-    res.json(artist);
+    if (artist === null) {
+      res.status(404).send();
+    } else {
+      res.json(artist);
+    }
   } catch (err) {
     console.error(err);
     res.status(404).send();
