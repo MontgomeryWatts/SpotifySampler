@@ -5,9 +5,10 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue';
 import { Context } from '@nuxt/types';
 
-export default {
+export default Vue.extend({
   name: 'ArtistPage',
   async asyncData({ $axios, params, error }: Context) {
     try {
@@ -17,5 +18,5 @@ export default {
       error({ statusCode: 404, message: 'Artist not found' });
     }
   }
-};
+});
 </script>
