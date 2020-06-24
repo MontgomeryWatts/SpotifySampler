@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import artistsRouter from './routes/artist';
+import artistsRouter from './routes/artists';
+import genresRouter from './routes/genres';
 
 const app = express();
 const uri = process.env.MONGODB_URI;
@@ -15,6 +16,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 app.disable('x-powered-by');
 
 app.use('/artists', artistsRouter);
+app.use('/genres', genresRouter);
 
 module.exports = {
   path: '/api/',

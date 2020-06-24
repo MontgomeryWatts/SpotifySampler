@@ -16,7 +16,7 @@ export default Vue.extend({
   },
   async asyncData({ $axios, params, error }: Context) {
     try {
-      const artist = await $axios.$get(`/api/artists/${params.id}`);
+      const artist: object = await $axios.$get(`/api/artists/${params.id}`);
       return { artist };
     } catch (e) {
       error({ statusCode: 404, message: 'Artist not found' });

@@ -5,9 +5,11 @@
       v-if="props.artist.images.length > 0"
       :src="props.artist.images[0].url"
     />
+    <img v-else src="~/assets/empty-artist-picture.png" />
     <b-button
       v-for="(genre, index) in props.artist.genres"
       :key="`genre-${index}`"
+      :to="`/genres/${genre}`"
       pill
     >
       {{ genre }}</b-button
