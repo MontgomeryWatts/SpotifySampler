@@ -6,6 +6,7 @@ const app = express();
 const uri = process.env.MONGODB_URI;
 
 if (uri === undefined) {
+  console.error('MONGODB_URI is not set in environment variables');
   process.exit(1);
 }
 

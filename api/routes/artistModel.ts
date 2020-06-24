@@ -1,6 +1,21 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-const artistSchema: mongoose.Schema = new mongoose.Schema({
+const Image: Schema = new Schema({
+  height: {
+    type: Number,
+    required: true
+  },
+  url: {
+    type: String,
+    required: true
+  },
+  width: {
+    type: Number,
+    required: true
+  }
+});
+
+const Artist: Schema = new Schema({
   name: {
     type: String,
     required: true
@@ -16,7 +31,11 @@ const artistSchema: mongoose.Schema = new mongoose.Schema({
   genres: {
     type: [String],
     required: false
+  },
+  images: {
+    type: [Image],
+    required: false
   }
 });
 
-export default mongoose.model('Artist', artistSchema);
+export default mongoose.model('Artist', Artist);
