@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <artist-preview
-      v-for="artist in artists"
-      :key="artist.uri"
-      :artist="artist"
-    />
-  </div>
+  <b-container fluid="md">
+    <b-row>
+      <b-col v-for="artist in artists" :key="artist.uri" sm="12" md="6">
+        <artist-preview :artist="artist" />
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script lang="ts">
@@ -24,7 +24,10 @@ export default Vue.extend({
         `/api/genres/${params.genre}`
       );
       return { artists };
-    } catch (e) {}
-  }
+    } catch (e) {
+      return { artists: [] };
+    }
+  },
+  watchQuery: ['page']
 });
 </script>

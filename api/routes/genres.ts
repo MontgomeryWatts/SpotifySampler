@@ -13,14 +13,24 @@ router.get('/', async (_req, res) => {
   }
 });
 
-router.get('/:genre', async (req, res) => {
-  try {
-    const artists = await Artist.find({ genres: req.params.genre });
-    res.json(artists);
-  } catch (err) {
-    console.error(err);
-    res.status(404).send();
-  }
+router.get('/:genre', (req, res) => {
+  const pageQuery: number = Number(req.query.page);
+  const page: number = isNaN(pageQuery) ? 1 : pageQuery;
+  const pageSize: number = 20;
+  Artist.aggregate(
+    [
+      { $match: { genres: req.params.genre } },
+      { $skip: (page - 1) * pageSize },
+      { $limit: pageSize }
+    ],
+    (err: Error, artists: any) => {
+      if (err) {
+        res.status(404).send();
+      } else {
+        res.json(artists);
+      }
+    }
+  );
 });
 
 export default router;

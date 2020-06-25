@@ -1,12 +1,13 @@
 <template>
-  <div class="container">
+  <b-container fluid="md">
     <artist-preview :artist="artist" />
-  </div>
+  </b-container>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import { Context } from '@nuxt/types';
+import Artist from '@/types/Artist';
 import ArtistPreview from '@/components/ArtistPreview.vue';
 
 export default Vue.extend({
@@ -16,7 +17,7 @@ export default Vue.extend({
   },
   async asyncData({ $axios, params, error }: Context) {
     try {
-      const artist: object = await $axios.$get(`/api/artists/${params.id}`);
+      const artist: Artist = await $axios.$get(`/api/artists/${params.id}`);
       return { artist };
     } catch (e) {
       error({ statusCode: 404, message: 'Artist not found' });

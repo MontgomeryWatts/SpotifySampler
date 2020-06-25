@@ -1,25 +1,41 @@
 <template functional>
-  <div>
-    <h1>{{ props.artist.name }}</h1>
-    <img
-      v-if="props.artist.images.length > 0"
-      :src="props.artist.images[0].url"
-    />
-    <img v-else src="~/assets/empty-artist-picture.png" />
+  <b-media>
+    <template v-slot:aside>
+      <b-link :href="props.artist.uri">
+        <b-img-lazy
+          v-if="props.artist.images && props.artist.images.length > 0"
+          :src="props.artist.images[props.artist.images.length - 1].url"
+          height="150"
+          width="150"
+        />
+        <b-img-lazy
+          v-else
+          height="150"
+          width="150"
+          src="~/assets/empty-artist-picture.png"
+        />
+      </b-link>
+    </template>
+
+    <b-link :to="`/artists/${props.artist._id}`" class="font-weight-bold">{{
+      props.artist.name
+    }}</b-link>
     <b-button
       v-for="(genre, index) in props.artist.genres"
       :key="`genre-${index}`"
       :to="`/genres/${genre}`"
+      class="mx-1"
+      size="sm"
       pill
     >
       {{ genre }}</b-button
     >
-  </div>
+  </b-media>
 </template>
 
 <script lang="ts">
 import Vue, { PropType } from 'vue';
-import Artist from '@/types/artist';
+import Artist from '@/types/Artist';
 
 export default Vue.extend({
   name: 'ArtistPreview',
