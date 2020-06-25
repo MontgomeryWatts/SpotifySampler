@@ -18,10 +18,15 @@ export default Vue.extend({
   components: {
     ArtistPreview
   },
-  async asyncData({ $axios, params }: Context) {
+  async asyncData({ $axios, params, query }: Context) {
     try {
       const artists: object[] = await $axios.$get(
-        `/api/genres/${params.genre}`
+        `/api/genres/${params.genre}`,
+        {
+          params: {
+            page: query.page
+          }
+        }
       );
       return { artists };
     } catch (e) {
