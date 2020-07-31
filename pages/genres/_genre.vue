@@ -4,6 +4,14 @@
       <b-col v-for="artist in artists" :key="artist.uri" sm="12" md="6">
         <artist-preview :artist="artist" />
       </b-col>
+      <b-col offset="4">
+        <b-pagination-nav
+          :link-gen="linkGen"
+          number-of-pages="10"
+          use-router
+          class="mt-4"
+        />
+      </b-col>
     </b-row>
   </b-container>
 </template>
@@ -28,11 +36,16 @@ export default Vue.extend({
           }
         }
       );
-      return { artists };
+      return { artists, page: query.page };
     } catch (e) {
-      return { artists: [] };
+      return { artists: [], page: query.page };
     }
   },
-  watchQuery: ['page']
+  watchQuery: ['page'],
+  methods: {
+    linkGen(pageNumber: Number): String {
+      return `?page=${pageNumber}`;
+    }
+  }
 });
 </script>

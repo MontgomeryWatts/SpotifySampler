@@ -1,19 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-
-const Image: Schema = new Schema({
-  height: {
-    type: Number,
-    required: true
-  },
-  url: {
-    type: String,
-    required: true
-  },
-  width: {
-    type: Number,
-    required: true
-  }
-});
+import Image from './imageSchema';
 
 const Artist: Schema = new Schema({
   name: {
