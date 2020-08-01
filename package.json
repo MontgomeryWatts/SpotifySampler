@@ -1,7 +1,7 @@
 {
-  "name": "random-spotify-artist",
+  "name": "artist-sampler-for-spotify",
   "version": "1.0.0",
-  "description": "My super-duper Nuxt.js project",
+  "description": "An application for discovering new artists on Spotify",
   "author": "Montgomery Watts",
   "private": true,
   "scripts": {
