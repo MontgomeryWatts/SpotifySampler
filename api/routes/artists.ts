@@ -5,12 +5,12 @@ const router = express.Router();
 
 router.get('/random', (_req, res) => {
   Artist.aggregate(
-    [{ $sample: { size: 1 } }, { $limit: 1 }],
-    (err: Error, artists: any) => {
+    [{ $sample: { size: 1 } }, { $limit: 1 }, { $project: { _id: 1 } }],
+    (err: Error, artist: Array<any>) => {
       if (err) {
         res.status(500).send();
       } else {
-        res.json(artists[0]);
+        res.json(artist[0]._id);
       }
     }
   );

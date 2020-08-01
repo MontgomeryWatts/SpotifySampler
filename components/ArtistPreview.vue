@@ -20,28 +20,18 @@
     <b-link :to="`/artists/${props.artist._id}`" class="font-weight-bold">{{
       props.artist.name
     }}</b-link>
-    <b-button
-      v-for="(genre, index) in props.artist.genres"
-      :key="`genre-${index}`"
-      :to="`/genres/${genre}`"
-      class="mx-1"
-      size="sm"
-      pill
-    >
-      {{ genre }}</b-button
-    >
   </b-media>
 </template>
 
 <script lang="ts">
 import Vue, { PropType } from 'vue';
-import Artist from '@/types/Artist';
+import SimpleArtist from '@/types/SimpleArtist';
 
 export default Vue.extend({
   name: 'ArtistPreview',
   props: {
     artist: {
-      type: Object as PropType<Artist>,
+      type: Object as PropType<SimpleArtist>,
       required: true
     }
   }

@@ -5,7 +5,9 @@ const router = express.Router();
 
 router.get('/', async (_req, res) => {
   try {
-    const genres: string[] = await Artist.distinct('genres');
+    const genres: string[] = await Artist.distinct('genres', {
+      genres: { $ne: null }
+    });
     res.json(genres);
   } catch (err) {
     console.error(err);
@@ -21,7 +23,8 @@ router.get('/:genre', (req, res) => {
     [
       { $match: { genres: req.params.genre } },
       { $skip: (page - 1) * pageSize },
-      { $limit: pageSize }
+      { $limit: pageSize },
+      { $project: { name: 1, uri: 1, images: 1 } }
     ],
     (err: Error, artists: any) => {
       if (err) {

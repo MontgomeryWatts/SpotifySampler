@@ -43,6 +43,9 @@ const config: Configuration = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios'
   ],
+  bootstrapVue: {
+    icons: true
+  },
   serverMiddleware: ['~/api/index.ts'],
   /*
    ** Axios module configuration

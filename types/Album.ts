@@ -1,9 +1,8 @@
 import Image from '@/types/Image';
 
-export default interface Artist {
+export default interface Album {
   _id: string;
   name: string;
   uri: string;
-  genres?: string[];
-  images?: Image[];
+  image?: Image;
 }
