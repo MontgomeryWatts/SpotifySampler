@@ -26,6 +26,11 @@ export default Vue.extend({
         message: 'Error occurred while loading genres. Try refreshing the page.'
       });
     }
+  },
+  head(): object {
+    return {
+      title: 'Spotify Genres'
+    };
   }
 });
 </script>

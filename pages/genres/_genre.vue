@@ -28,6 +28,7 @@
 import Vue from 'vue';
 import { Context } from '@nuxt/types';
 import ArtistPreview from '@/components/ArtistPreview.vue';
+import SimpleArtist from '@/types/SimpleArtist';
 
 export default Vue.extend({
   name: 'GenrePage',
@@ -38,7 +39,7 @@ export default Vue.extend({
     const pageQuery: number = Number(query.page);
     const page: number = isNaN(pageQuery) ? 1 : pageQuery;
     try {
-      const artists: object[] = await $axios.$get(
+      const artists: SimpleArtist[] = await $axios.$get(
         `/api/genres/${params.genre}`,
         {
           params: {
@@ -46,16 +47,36 @@ export default Vue.extend({
           }
         }
       );
-      return { artists, page };
+      return { page, artists, genre: params.genre };
     } catch (e) {
-      return { artists: [], page };
+      return { page, artists: [], genre: params.genre };
     }
   },
+  data() {
+    return {
+      artists: [] as SimpleArtist[],
+      page: 1 as number,
+      genre: '' as string
+    };
+  },
   watchQuery: ['page'],
+  computed: {
+    capitalizedGenre(): string {
+      return this.genre
+        .split(' ')
+        .map((x) => x[0].toUpperCase() + x.slice(1))
+        .join(' ');
+    }
+  },
   methods: {
     linkGen(pageNumber: Number): String {
       return `?page=${pageNumber}`;
     }
+  },
+  head(): object {
+    return {
+      title: `${this.capitalizedGenre} Artists`
+    };
   }
 });
 </script>

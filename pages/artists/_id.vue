@@ -47,6 +47,18 @@ export default Vue.extend({
     } catch (e) {
       error({ statusCode: 404, message: 'Artist not found' });
     }
+  },
+  data() {
+    return {
+      artist: {
+        name: ''
+      } as FullArtist
+    };
+  },
+  head(): object {
+    return {
+      title: this.artist.name
+    };
   }
 });
 </script>
