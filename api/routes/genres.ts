@@ -1,13 +1,12 @@
 import express from 'express';
 
 import Artist from './artistModel';
+import Genre from './genreModel';
 const router = express.Router();
 
 router.get('/', async (_req, res) => {
   try {
-    const genres: string[] = await Artist.distinct('genres', {
-      genres: { $ne: null }
-    });
+    const genres: object[] = await Genre.find();
     res.json(genres);
   } catch (err) {
     console.error(err);

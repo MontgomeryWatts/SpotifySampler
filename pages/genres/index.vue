@@ -1,10 +1,17 @@
 <template>
   <b-container fluid="md">
     <b-row>
-      <b-col v-for="genre in genres" :key="genre" sm="6" md="4" class="my-2">
-        <b-button :to="`/genres/${genre}`" size="sm" pill>
-          {{ genre }}</b-button
-        >
+      <b-col
+        v-for="genre in genres"
+        :key="genre._id"
+        sm="6"
+        md="4"
+        class="my-2"
+      >
+        <b-button :to="`/genres/${genre._id}`" size="sm" pill>
+          {{ genre._id }}
+          <b-badge variant="light">{{ genre.numArtists }}</b-badge>
+        </b-button>
       </b-col>
     </b-row>
   </b-container>
@@ -18,7 +25,7 @@ export default Vue.extend({
   name: 'GenreIndexPage',
   async asyncData({ $axios, error }: Context) {
     try {
-      const genres: string[] = await $axios.$get('/api/genres');
+      const genres: object[] = await $axios.$get('/api/genres');
       return { genres };
     } catch (e) {
       error({
