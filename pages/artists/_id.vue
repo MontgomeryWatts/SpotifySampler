@@ -6,12 +6,14 @@
       height="500"
       width="500"
       :src="artist.images[0].url"
+      :alt="`${artist.name}'s profile picture`"
     />
     <b-img-lazy
       v-else
       height="150"
       width="150"
       src="~/assets/empty-artist-picture.png"
+      alt="Default profile picture"
     />
     <b-button
       v-for="genre in artist.genres"
@@ -27,7 +29,13 @@
         <a :href="album.uri">
           {{ album.name }}
         </a>
-        <b-img height="300" width="300" :src="album.image.url" />
+        <b-img-lazy
+          v-if="album.image"
+          height="300"
+          width="300"
+          :src="album.image.url"
+          :alt="`${album.name}'s album art`"
+        />
       </b-col>
     </b-row>
   </b-container>

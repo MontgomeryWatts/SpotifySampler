@@ -4,9 +4,15 @@ import Artist from './artistModel';
 import Genre from './genreModel';
 const router = express.Router();
 
-router.get('/', async (_req, res) => {
+router.get('/', async (req, res) => {
+  const pageQuery: number = Number(req.query.page);
+  const page: number = isNaN(pageQuery) ? 1 : pageQuery;
+  const pageSize: number = 30;
   try {
-    const genres: object[] = await Genre.find();
+    const genres: object[] = await Genre.find()
+      .sort({ _id: 1 })
+      .skip((page - 1) * pageSize)
+      .limit(pageSize);
     res.json(genres);
   } catch (err) {
     console.error(err);
@@ -14,25 +20,26 @@ router.get('/', async (_req, res) => {
   }
 });
 
-router.get('/:genre', (req, res) => {
+router.get('/:genre', async (req, res) => {
   const pageQuery: number = Number(req.query.page);
   const page: number = isNaN(pageQuery) ? 1 : pageQuery;
   const pageSize: number = 20;
-  Artist.aggregate(
-    [
+  try {
+    const artists = await Artist.aggregate([
       { $match: { genres: req.params.genre } },
       { $skip: (page - 1) * pageSize },
       { $limit: pageSize },
       { $project: { name: 1, uri: 1, images: 1 } }
-    ],
-    (err: Error, artists: any) => {
-      if (err) {
-        res.status(404).send();
-      } else {
-        res.json(artists);
-      }
-    }
-  );
+    ]);
+    const genreDoc: any = await Genre.findById(req.params.genre);
+    const payload = {
+      artists,
+      numPages: Math.ceil(genreDoc.numArtists / pageSize)
+    };
+    res.json(payload);
+  } catch (e) {
+    res.status(404).send();
+  }
 });
 
 export default router;

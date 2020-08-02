@@ -30,6 +30,7 @@
             <a
               href="https://developer.spotify.com/documentation/web-api/"
               target="_blank"
+              rel="noreferrer"
               >Web API</a
             >.
           </p>

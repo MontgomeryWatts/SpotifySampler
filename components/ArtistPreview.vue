@@ -5,11 +5,13 @@
         <b-img-lazy
           v-if="props.artist.images && props.artist.images.length > 0"
           :src="props.artist.images[props.artist.images.length - 1].url"
+          :alt="`${props.artist.name}'s profile picture`"
           height="150"
           width="150"
         />
         <b-img-lazy
           v-else
+          alt="Default profile picture"
           height="150"
           width="150"
           src="~/assets/empty-artist-picture.png"

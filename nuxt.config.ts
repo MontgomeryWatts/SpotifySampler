@@ -6,6 +6,9 @@ const config: Configuration = {
    ** Headers of the page
    */
   head: {
+    htmlAttrs: {
+      lang: 'en'
+    },
     title: 'Artist Sampler for Spotify',
     meta: [
       { charset: 'utf-8' },

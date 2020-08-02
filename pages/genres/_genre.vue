@@ -2,7 +2,7 @@
   <b-container fluid="md">
     <b-row>
       <b-col
-        v-for="artist in artists"
+        v-for="artist in artistsPage.artists"
         :key="artist.uri"
         sm="12"
         md="6"
@@ -10,16 +10,16 @@
       >
         <artist-preview :artist="artist" />
       </b-col>
-      <b-col>
-        <b-pagination-nav
-          v-model="page"
-          :link-gen="linkGen"
-          number-of-pages="10"
-          hide-ellipsis
-          use-router
-          class="mt-4"
-        />
-      </b-col>
+    </b-row>
+    <b-row>
+      <b-pagination-nav
+        v-model="page"
+        :link-gen="linkGen"
+        :number-of-pages="artistsPage.numPages"
+        hide-ellipsis
+        use-router
+        class="mt-4 d-block mx-auto"
+      />
     </b-row>
   </b-container>
 </template>
@@ -39,7 +39,7 @@ export default Vue.extend({
     const pageQuery: number = Number(query.page);
     const page: number = isNaN(pageQuery) ? 1 : pageQuery;
     try {
-      const artists: SimpleArtist[] = await $axios.$get(
+      const artistsPage: object = await $axios.$get(
         `/api/genres/${params.genre}`,
         {
           params: {
@@ -47,9 +47,9 @@ export default Vue.extend({
           }
         }
       );
-      return { page, artists, genre: params.genre };
+      return { page, artistsPage, genre: params.genre };
     } catch (e) {
-      return { page, artists: [], genre: params.genre };
+      return { page, artistsPage: [], genre: params.genre };
     }
   },
   data() {
