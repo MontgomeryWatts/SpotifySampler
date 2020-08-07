@@ -6,7 +6,7 @@
         :key="artist.uri"
         sm="12"
         md="6"
-        class="my-2 pl-0 border-bottom"
+        class="my-2 pl-0"
       >
         <artist-preview :artist="artist" />
       </b-col>

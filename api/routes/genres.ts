@@ -7,13 +7,18 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   const pageQuery: number = Number(req.query.page);
   const page: number = isNaN(pageQuery) ? 1 : pageQuery;
-  const pageSize: number = 30;
+  const pageSize: number = 40;
   try {
     const genres: object[] = await Genre.find()
       .sort({ _id: 1 })
       .skip((page - 1) * pageSize)
       .limit(pageSize);
-    res.json(genres);
+    const numGenres: number = await Genre.countDocuments({});
+    const payload = {
+      genres,
+      numPages: Math.ceil(numGenres / pageSize)
+    };
+    res.json(payload);
   } catch (err) {
     console.error(err);
     res.status(500).send();

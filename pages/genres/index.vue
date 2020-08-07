@@ -2,10 +2,10 @@
   <b-container fluid="md">
     <b-row>
       <b-col
-        v-for="genre in genres"
+        v-for="genre in genresPage.genres"
         :key="genre._id"
         sm="6"
-        md="4"
+        md="3"
         class="my-2"
       >
         <b-button :to="`/genres/${genre._id}`" size="sm" pill>
@@ -13,6 +13,16 @@
           <b-badge variant="light">{{ genre.numArtists }}</b-badge>
         </b-button>
       </b-col>
+    </b-row>
+    <b-row>
+      <b-pagination-nav
+        v-model="page"
+        :link-gen="linkGen"
+        :number-of-pages="genresPage.numPages"
+        hide-ellipsis
+        use-router
+        class="mt-4 d-block mx-auto"
+      />
     </b-row>
   </b-container>
 </template>
@@ -23,15 +33,27 @@ import { Context } from '@nuxt/types';
 
 export default Vue.extend({
   name: 'GenreIndexPage',
-  async asyncData({ $axios, error }: Context) {
+  async asyncData({ $axios, query, error }: Context) {
+    const pageQuery: number = Number(query.page);
+    const page: number = isNaN(pageQuery) ? 1 : pageQuery;
     try {
-      const genres: object[] = await $axios.$get('/api/genres');
-      return { genres };
+      const genresPage: object = await $axios.$get('/api/genres', {
+        params: {
+          page
+        }
+      });
+      return { page, genresPage };
     } catch (e) {
       error({
         statusCode: 500,
         message: 'Error occurred while loading genres. Try refreshing the page.'
       });
+    }
+  },
+  watchQuery: ['page'],
+  methods: {
+    linkGen(pageNumber: Number): String {
+      return `?page=${pageNumber}`;
     }
   },
   head(): object {
