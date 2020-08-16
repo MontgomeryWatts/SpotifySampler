@@ -54,7 +54,9 @@ const config: Configuration = {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    proxy: true
+  },
   /*
    ** Build configuration
    */
@@ -63,6 +65,10 @@ const config: Configuration = {
      ** You can extend webpack config here
      */
     extend(_config, _ctx) {}
+  },
+  server: {
+    host: '0.0.0.0',
+    port: process.env.PORT || 80
   }
 };
 

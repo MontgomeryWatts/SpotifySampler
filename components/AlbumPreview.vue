@@ -4,13 +4,13 @@
       <b-img-lazy
         v-if="props.album.image"
         :src="props.album.image.url"
-        :alt="`${props.album.name}'s profile picture`"
+        :alt="`${props.album.name}'s album art`"
         height="200"
         width="200"
       />
       <b-img-lazy
         v-else
-        alt="Default profile picture"
+        alt="Default album art"
         height="200"
         width="200"
         src="~/assets/empty-artist-picture.png"

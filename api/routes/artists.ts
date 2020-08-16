@@ -9,6 +9,8 @@ router.get('/random', (_req, res) => {
     (err: Error, artist: Array<any>) => {
       if (err) {
         res.status(500).send();
+      } else if (artist.length === 0) {
+        res.status(404).send();
       } else {
         res.json(artist[0]._id);
       }

@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 import artistsRouter from './routes/artists';
 import genresRouter from './routes/genres';
 
@@ -14,6 +15,7 @@ if (uri === undefined) {
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.disable('x-powered-by');
+app.use(cors());
 
 app.use('/artists', artistsRouter);
 app.use('/genres', genresRouter);
