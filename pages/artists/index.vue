@@ -30,51 +30,36 @@ import { Context } from '@nuxt/types';
 import ArtistPreview from '@/components/ArtistPreview.vue';
 
 export default Vue.extend({
-  name: 'GenrePage',
+  name: 'ArtistsPage',
   components: {
     ArtistPreview
   },
-  async asyncData({ $axios, params, query }: Context) {
+  async asyncData({ $axios, query }: Context) {
     const pageQuery: number = Number(query.page);
     const page: number = isNaN(pageQuery) ? 1 : pageQuery;
+    const name = query.name;
     try {
-      const artistsPage: object = await $axios.$get(
-        `/api/genres/${params.genre}`,
-        {
-          params: {
-            page
-          }
+      const artistsPage: object = await $axios.$get(`/api/artists`, {
+        params: {
+          page,
+          name
         }
-      );
-      return { page, artistsPage, genre: params.genre };
+      });
+      return { page, artistsPage, name };
     } catch (e) {
-      return { page, artistsPage: {}, genre: params.genre };
+      return { page, artistsPage: {}, name: '' };
     }
   },
   data() {
     return {
-      page: 1 as number,
-      genre: '' as string
+      name: '' as string
     };
   },
-  watchQuery: ['page'],
-  computed: {
-    capitalizedGenre(): string {
-      return this.genre
-        .split(' ')
-        .map((x) => x[0].toUpperCase() + x.slice(1))
-        .join(' ');
-    }
-  },
+  watchQuery: ['page', 'name'],
   methods: {
     linkGen(pageNumber: Number): String {
-      return `?page=${pageNumber}`;
+      return `?page=${pageNumber}&name=${this.name}`;
     }
-  },
-  head(): object {
-    return {
-      title: `${this.capitalizedGenre} Artists`
-    };
   }
 });
 </script>
