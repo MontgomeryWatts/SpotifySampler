@@ -2,6 +2,7 @@
   <b-button pill size="sm" :href="props.spotifyUri" class="spotify-green">
     <b-img-lazy
       src="~/assets/Spotify_Icon_RGB_White.png"
+      alt="Spotify Logo"
       height="20"
       width="20"
     />
