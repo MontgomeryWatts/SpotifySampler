@@ -41,7 +41,6 @@ export default Vue.extend({
     },
     searchArtist(): void {
       if (this.name) {
-        console.log('bitch!');
         this.$router.push({ path: '/artists', query: { name: this.name } });
         this.name = '';
       } else {

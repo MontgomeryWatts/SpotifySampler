@@ -58,7 +58,11 @@ export default Vue.extend({
   watchQuery: ['page', 'name'],
   methods: {
     linkGen(pageNumber: Number): String {
-      return `?page=${pageNumber}&name=${this.name}`;
+      let link = `?page=${pageNumber}`;
+      if (this.name) {
+        link += `&name=${this.name}`;
+      }
+      return link;
     }
   }
 });
