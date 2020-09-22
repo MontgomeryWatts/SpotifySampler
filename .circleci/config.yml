@@ -8,7 +8,7 @@ workflows:
   build_and_push_image: 
     jobs:
       - aws-ecr/build-and-push-image:
-          repo: $AWS_ECR_REPO
+          repo: spotify_sampler_repository
           filters:
             branches:
               only: master
