@@ -25,7 +25,9 @@
         class="font-weight-bold d-block"
         >{{ props.artist.name }}</b-link
       >
-      <spotify-button :spotify-uri="props.artist.uri" />
+      <spotify-button
+        :spotify-uri="`https://open.spotify.com/artist/${props.artist._id}`"
+      />
     </b-media-body>
   </b-media>
 </template>

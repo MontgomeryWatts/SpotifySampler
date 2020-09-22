@@ -1,5 +1,12 @@
 <template functional>
-  <b-button pill size="sm" :href="props.spotifyUri" class="spotify-green">
+  <b-button
+    pill
+    size="sm"
+    :href="props.spotifyUri"
+    rel="noreferrer"
+    target="_blank"
+    class="spotify-green"
+  >
     <b-img-lazy
       src="~/assets/Spotify_Icon_RGB_White.png"
       alt="Spotify Logo"

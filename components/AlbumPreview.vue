@@ -21,7 +21,9 @@
       <h5 :to="`/artists/${props.album._id}`" class="font-weight-bold d-block">
         {{ props.album.name }}
       </h5>
-      <spotify-button :spotify-uri="props.album.uri" />
+      <spotify-button
+        :spotify-uri="`https://open.spotify.com/album/${props.album._id}`"
+      />
     </b-media-body>
   </b-media>
 </template>

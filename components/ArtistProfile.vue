@@ -19,7 +19,9 @@
     <b-media-body class="pl-2">
       <h1>{{ props.artist.name }}</h1>
 
-      <spotify-button :spotify-uri="props.artist.uri" />
+      <spotify-button
+        :spotify-uri="`https://open.spotify.com/artist/${props.artist._id}`"
+      />
       <div class="mt-2">
         <b-button
           v-for="genre in props.artist.genres"
