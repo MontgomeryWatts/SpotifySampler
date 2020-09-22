@@ -16,5 +16,6 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
           family: spotify_sampler_web_server
+          service-name: spotify_sampler_service
           cluster-name: spotify_sampler_cluster
           container-image-name-updates: 'container=web-server,tag=latest'
