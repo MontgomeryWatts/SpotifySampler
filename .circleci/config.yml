@@ -1,0 +1,20 @@
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@6.12.2
+  aws-ecs: circleci/aws-ecs@1.3.0
+
+workflows:
+  build_and_push_image: 
+    jobs:
+      - aws-ecr/build-and-push-image:
+          repo: $AWS_ECR_REPO
+          filters:
+            branches:
+              only: master
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: spotify_sampler_web_server
+          cluster-name: spotify_sampler_cluster
+          container-image-name-updates: 'tag=latest'
