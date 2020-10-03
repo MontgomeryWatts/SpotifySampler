@@ -36,13 +36,16 @@
       </b-col>
     </b-row>
 
-    <b-row class="mt-2">
+    <b-row class="mt-2" v-if="artist.albums">
+      <b-col cols="12" class="text-center border-bottom">
+        <h1>Discography</h1>
+      </b-col>
       <b-col
         v-for="album in artist.albums"
         :key="album._id"
         sm="12"
         md="6"
-        class="mb-2"
+        class="py-2 border-bottom"
       >
         <album-preview :album="album" />
       </b-col>
