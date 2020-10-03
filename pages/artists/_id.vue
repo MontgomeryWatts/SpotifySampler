@@ -1,6 +1,40 @@
 <template>
   <b-container fluid="md">
-    <artist-profile :artist="artist" />
+    <b-row>
+      <b-col md="8" sm="12">
+        <b-img-lazy
+          fluid
+          v-if="artist.images && artist.images.length > 0"
+          :src="artist.images[0].url"
+          :alt="`${artist.name}'s profile picture`"
+        />
+        <b-img-lazy
+          fluid
+          v-else
+          src="~/assets/empty-artist-picture.png"
+          alt="Default profile picture"
+        />
+      </b-col>
+      <b-col md="4" sm="12">
+        <h1>{{ artist.name }}</h1>
+
+        <spotify-button
+          :spotify-uri="`https://open.spotify.com/artist/${artist._id}`"
+        />
+        <div class="mt-2">
+          <b-button
+            v-for="genre in artist.genres"
+            :key="genre"
+            :to="`/genres/${genre}`"
+            class="m-1"
+            size="sm"
+            pill
+          >
+            {{ genre }}</b-button
+          >
+        </div>
+      </b-col>
+    </b-row>
 
     <b-row class="mt-2">
       <b-col
@@ -20,14 +54,14 @@
 import Vue from 'vue';
 import { Context } from '@nuxt/types';
 import FullArtist from '@/types/FullArtist';
-import ArtistProfile from '@/components/ArtistProfile.vue';
 import AlbumPreview from '@/components/AlbumPreview.vue';
+import SpotifyButton from '@/components/SpotifyButton.vue';
 
 export default Vue.extend({
   name: 'ArtistPage',
   components: {
-    ArtistProfile,
-    AlbumPreview
+    AlbumPreview,
+    SpotifyButton
   },
   async asyncData({ $axios, params, error }: Context) {
     try {
