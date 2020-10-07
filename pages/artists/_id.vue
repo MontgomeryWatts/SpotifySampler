@@ -1,21 +1,21 @@
 <template>
   <b-container fluid="md">
     <b-row>
-      <b-col md="8" sm="12">
+      <b-col md="4" sm="12">
         <b-img-lazy
-          fluid
           v-if="artist.images && artist.images.length > 0"
+          fluid
           :src="artist.images[0].url"
           :alt="`${artist.name}'s profile picture`"
         />
         <b-img-lazy
-          fluid
           v-else
+          fluid
           src="~/assets/empty-artist-picture.png"
           alt="Default profile picture"
         />
       </b-col>
-      <b-col md="4" sm="12">
+      <b-col md="8" sm="12">
         <h1>{{ artist.name }}</h1>
 
         <spotify-button
@@ -36,7 +36,7 @@
       </b-col>
     </b-row>
 
-    <b-row class="mt-2" v-if="artist.albums">
+    <b-row v-if="artist.albums" class="mt-2">
       <b-col cols="12" class="text-center border-bottom">
         <h1>Discography</h1>
       </b-col>
