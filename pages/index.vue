@@ -5,8 +5,8 @@
         <b-media vertical-align="center">
           <template v-slot:aside>
             <b-img-lazy
-              src="~/assets/Spotify_Logo_RGB_Green.png"
-              height="45"
+              src="~/assets/Spotify_logo_with_text.svg"
+              height="100"
               width="150"
               alt="Spotify Logo"
             />
@@ -55,8 +55,8 @@
         <b-media vertical-align="center">
           <template v-slot:aside>
             <b-img-lazy
-              src="~/assets/MongoDB_Logo_FullColorBlack_RGB.png"
-              height="40"
+              src="~/assets/MongoDB_Logo_FullColorBlack_RGB.svg"
+              height="50"
               width="150"
               alt="MongoDB Logo"
             />
@@ -115,8 +115,8 @@
         <b-media vertical-align="center">
           <template v-slot:aside>
             <b-img-lazy
-              src="~/assets/AWS_logo.png"
-              height="107"
+              src="~/assets/Amazon_Web_Services_Logo.svg"
+              height="50"
               width="150"
               alt="AWS Logo"
             />
@@ -197,8 +197,8 @@
         <b-media vertical-align="center">
           <template v-slot:aside>
             <b-img-lazy
-              src="~/assets/Terraform_PrimaryLogo_FullColor_RGB.png"
-              height="53"
+              src="~/assets/Terraform_PrimaryLogo_FullColor_RGB.svg"
+              height="100"
               width="150"
               alt="HashiCorp Terraform Logo"
             />

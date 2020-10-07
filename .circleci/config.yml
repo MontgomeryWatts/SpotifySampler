@@ -19,3 +19,4 @@ workflows:
           service-name: spotify_sampler_service
           cluster-name: spotify_sampler_cluster
           container-image-name-updates: 'container=web-server,tag=latest'
+          verify-revision-is-deployed: true

@@ -18,9 +18,9 @@
     </b-media-aside>
 
     <b-media-body class="ml-4">
-      <h5 :to="`/artists/${props.album._id}`" class="font-weight-bold d-block">
+      <p class="font-weight-bold d-block">
         {{ props.album.name }}
-      </h5>
+      </p>
       <spotify-button
         :spotify-uri="`https://open.spotify.com/album/${props.album._id}`"
       />
