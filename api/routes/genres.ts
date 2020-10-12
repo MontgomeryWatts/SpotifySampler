@@ -37,19 +37,31 @@ router.get('/:genre', async (req, res) => {
     const artistsPage = await Artist.aggregate([
       { $match: { genres: req.params.genre } },
       {
-        $facet: {
-          total: [{ $count: 'total' }],
-          artists: [
-            { $skip: (page - 1) * pageSize },
-            { $limit: pageSize },
-            { $project: { name: 1, uri: 1, images: 1 } }
-          ]
+        $group: {
+          _id: null,
+          total: { $sum: 1 },
+          artists: {
+            $push: {
+              _id: '$_id',
+              name: '$name',
+              uri: '$uri',
+              images: '$images'
+            }
+          }
+        }
+      },
+      {
+        $project: {
+          total: 1,
+          artists: {
+            $slice: ['$artists', (page - 1) * pageSize, pageSize]
+          }
         }
       }
     ]);
     const payload = {
       artists: artistsPage[0].artists,
-      numPages: Math.ceil(artistsPage[0].total[0].total / pageSize)
+      numPages: Math.ceil(artistsPage[0].total / pageSize)
     };
     res.json(payload);
   } catch (e) {
